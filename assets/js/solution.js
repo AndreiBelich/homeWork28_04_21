@@ -53,11 +53,9 @@ function createImageWrapper(id, profilePicture, firstName, lastName){
   }});
   const fullName = getFullName(firstName, lastName);
   const initialsText = fullName.length ? firstName[0] + lastName[0] : "UP";
-  console.log(stringToColor(initialsText));
   const initials = createElement("div", {classNames: ["initials"]}, createElement("span", {}, document.createTextNode(initialsText)));
   initials.style.backgroundColor = stringToColor(initialsText);
   const imageWrapper = createElement("div", {classNames: ["imageWrapper"]},initials, img);
-  
   return imageWrapper;
 }
 
