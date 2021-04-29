@@ -52,9 +52,12 @@ function createImageWrapper(id, profilePicture, firstName, lastName){
     hidden: false
   }});
   const fullName = getFullName(firstName, lastName);
-  const initialsText = fullName.length ? firstName[0] + lastName[0] : "UP"; 
+  const initialsText = fullName.length ? firstName[0] + lastName[0] : "UP";
+  console.log(stringToColor(initialsText));
   const initials = createElement("div", {classNames: ["initials"]}, createElement("span", {}, document.createTextNode(initialsText)));
+  initials.style.backgroundColor = stringToColor(initialsText);
   const imageWrapper = createElement("div", {classNames: ["imageWrapper"]},initials, img);
+  
   return imageWrapper;
 }
 
@@ -76,4 +79,17 @@ function createSocialBlock(contacts){
 
 function getFullName(firstName, lastName){
   return `${firstName} ${lastName}`.trim();
+}
+
+function stringToColor(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  var colour = '#';
+  for (let i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xFF;
+    colour += ('00' + value.toString(16)).substr(-2);
+  }
+  return colour;
 }
